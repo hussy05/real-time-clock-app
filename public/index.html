@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Clock</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #282c34;
+      color: #61dafb;
+      text-align: center;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    #clock {
+      font-size: 3em;
+      font-weight: bold;
+      background-color: #fff;
+      color: #282c34;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+</head>
+<body>
+  <h1>Real-Time Clock</h1>
+  <div id="clock"></div>
+
+  <script>
+    const socket = io();
+
+    // Listen for 'time' events from the server
+    socket.on('time', (data) => {
+      const clockElement = document.getElementById('clock');
+      clockElement.textContent = `Current Time: ${data.time}`;
+    });
+  </script>
+</body>
+</html>
